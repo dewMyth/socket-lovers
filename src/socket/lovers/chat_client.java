@@ -5,6 +5,10 @@
  */
 package socket.lovers;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.Socket;
+
 /**
  *
  * @author Dewmith Akalanka
@@ -14,6 +18,13 @@ public class chat_client extends javax.swing.JFrame {
     /**
      * Creates new form chat_client
      */
+    
+    static Socket s;
+    static DataInputStream din;
+    static DataOutputStream dout;
+    
+    
+    
     public chat_client() {
         initComponents();
     }
@@ -39,6 +50,11 @@ public class chat_client extends javax.swing.JFrame {
         jScrollPane1.setViewportView(msg_area);
 
         msg_send.setText("Send");
+        msg_send.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                msg_sendActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,6 +84,18 @@ public class chat_client extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void msg_sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msg_sendActionPerformed
+        // TODO add your handling code here:
+        try{
+            String msgout = "";
+            msgout = msg_text.getText().trim();
+            dout.writeUTF(msgout);
+        }catch(Exception e){
+            //hancle exception
+        }
+      
+    }//GEN-LAST:event_msg_sendActionPerformed
 
     /**
      * @param args the command line arguments
@@ -102,6 +130,19 @@ public class chat_client extends javax.swing.JFrame {
                 new chat_client().setVisible(true);
             }
         });
+        
+        try{
+            s = new Socket("127.0.0.1", 1201); //The Ip address for localhost
+            din = new DataInputStream(s.getInputStream());
+            dout = new DataOutputStream(s.getOutputStream());
+            String msgin = "";
+            while(!msgin.equals("exit")){
+                msgin = din.readUTF();
+                msg_area.setText(msg_area.getText().trim()+"\n Server :\t " + msgin);
+            }
+        }catch(Exception e){
+            //handle exception
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

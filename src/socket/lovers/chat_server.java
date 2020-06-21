@@ -99,9 +99,9 @@ public class chat_server extends javax.swing.JFrame {
     private void msg_sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msg_sendActionPerformed
         // TODO add your handling code here:
         try{
-                  String msgout = "";
-        msgout = msg_text.getText().trim();
-        dout.writeUTF(msgout); //sending the server message to client
+            String msgout = "";
+            msgout = msg_text.getText().trim();
+            dout.writeUTF(msgout); //sending the server message to client
         }catch(Exception e){
             //handle exception
         }
@@ -156,7 +156,7 @@ public class chat_server extends javax.swing.JFrame {
                 msg_area.setText(msg_area.getText().trim()+"\n" + msgin); //displaiyng the message
             }
         }catch (Exception e) {
-            
+          //handle exception  
         }
     }
 
