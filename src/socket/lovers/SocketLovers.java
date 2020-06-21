@@ -5,6 +5,8 @@
  */
 package socket.lovers;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Dewmith Akalanka
@@ -15,7 +17,21 @@ public class SocketLovers {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        System.out.println("Hello World!");
+        String text = "Somthing";
+        String msg = "";
+        char[] chars = text.toCharArray();
+        ArrayList<String> characters = new ArrayList<String>();
+       
+        for(char c : chars){
+            c += 1;
+            characters.add( String.valueOf(c));
+        }
+     String newMessage = "";
+     
+     for(String letter : characters){
+         newMessage += letter;
+     }
+     System.out.println(newMessage);
     }
     
 }
